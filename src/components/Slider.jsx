@@ -2,7 +2,9 @@ import {
   KeyboardArrowLeftOutlined,
   KeyboardArrowRightOutlined,
 } from "@material-ui/icons";
+import { useState } from "react";
 import styled from "styled-components";
+import { sliderItems } from "../data";
 
 const Container = styled.div`
   width: 100%;
@@ -35,7 +37,8 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transform: translateX(0vw);
+  transition: all 1.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -76,50 +79,33 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
-  const handleClick = (direction) => {};
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
 
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
         <KeyboardArrowLeftOutlined />
       </Arrow>
-      <Wrapper>
-        <Slide bg="f5fafd">
-          <ImgContainer>
-            <Image src="https://t3.ftcdn.net/jpg/01/38/79/48/360_F_138794811_tYxsKCXWNrXzyNiEv0xwBFDhGSbgiEsR.jpg"></Image>
-          </ImgContainer>
-          <InfoContainer>
-            <Title>SUMMER SALE</Title>
-            <Description>
-              DONT FORGET YOUR DREAM STYLE. PACK IT RIGHT NOW!
-            </Description>
-            <Button>ORDER NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg="f5fafd">
-          <ImgContainer>
-            <Image src="https://t3.ftcdn.net/jpg/01/38/79/48/360_F_138794811_tYxsKCXWNrXzyNiEv0xwBFDhGSbgiEsR.jpg"></Image>
-          </ImgContainer>
-          <InfoContainer>
-            <Title>WINTER SALE</Title>
-            <Description>
-              DONT FORGET YOUR DREAM STYLE. PACK IT RIGHT NOW!
-            </Description>
-            <Button>ORDER NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg="f5fafd">
-          <ImgContainer>
-            <Image src="https://t3.ftcdn.net/jpg/01/38/79/48/360_F_138794811_tYxsKCXWNrXzyNiEv0xwBFDhGSbgiEsR.jpg"></Image>
-          </ImgContainer>
-          <InfoContainer>
-            <Title>SPRING SALE</Title>
-            <Description>
-              DONT FORGET YOUR DREAM STYLE. PACK IT RIGHT NOW!
-            </Description>
-            <Button>ORDER NOW</Button>
-          </InfoContainer>
-        </Slide>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImgContainer>
+              <Image src={item.img}></Image>
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Description>{item.desc}</Description>
+              <Button>ORDER NOW</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
       </Wrapper>
       <Arrow direction="right" onClick={() => handleClick("right")}>
         <KeyboardArrowRightOutlined />
