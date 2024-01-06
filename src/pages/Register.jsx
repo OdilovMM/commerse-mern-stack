@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -14,11 +15,15 @@ const Container = styled.div`
 
   align-items: center;
   justify-content: center;
+
 `;
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
+  opacity: 0.92;
+  ${mobile({ width: "75%", borderRadius: "5px" })}
+
 `;
 const Title = styled.h1`
 font-size: 24px;
@@ -28,6 +33,8 @@ font-weight: 300;
 const Form = styled.form`
 display: flex;
 flex-wrap: wrap;
+${mobile({ flexDirection: "column" })}
+
 `;
 const Input = styled.input`
 flex: 1;
@@ -38,6 +45,8 @@ padding: 10px;
 const Agreement = styled.span`
 font-size: 12px;
 margin: 12px 0px;
+${mobile({ textAlign: "center" })}
+
 `;
 const Button = styled.button`
 width: 40%;
@@ -46,6 +55,8 @@ padding: 15px 20px;
 background-color: teal;
 color: white;
 cursor: pointer;
+${mobile({ width: "100%", borderRadius: "5px" })}
+
 `;
 
 const Register = () => {
@@ -64,7 +75,7 @@ const Register = () => {
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>Create</Button>
+          <Button>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

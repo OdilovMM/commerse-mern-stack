@@ -5,15 +5,18 @@ import {
   Twitter,
   WhatsApp,
   YouTube,
-  Pinterest,
+  
   LocationOn,
   Call,
   AlternateEmail,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${mobile({ flexDirection: "column" })}
+
 `;
 
 const Left = styled.div`
@@ -48,6 +51,8 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: "none" })}
+
 `;
 
 const Title = styled.h3`
@@ -70,6 +75,8 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: "#fff8f8" })}
+
 `;
 
 const ContactItem = styled.div`
@@ -81,6 +88,8 @@ align-items: center;
 
 const Payment = styled.img`
 width: 50%;
+${mobile({ width: "100%" })}
+
 `;
 
 const Footer = () => {
@@ -113,9 +122,6 @@ const Footer = () => {
             <WhatsApp />
           </SocialIcon>
 
-          <SocialIcon>
-            <Pinterest />
-          </SocialIcon>
         </SocialContainer>
       </Left>
       <Center>
